@@ -1,13 +1,10 @@
-#include <Core.h>
+#pragma once
+#include "Core.h"
 
 namespace Vinculum {
 
-    int MotionCalculator (relativePathNode& target, float speedPct, float driveTime = 0)
+    int MotionCalculator (relativePathNode& target, uint8_t speedPct, float driveTime = 0)
     {
-        while (true)
-        {
-
-            vex::task::sleep(25);
-        }
+        
     }
 }

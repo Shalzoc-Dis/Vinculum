@@ -5,7 +5,7 @@
 	},
 	"project": {
 		"name": "Vinculum",
-		"description": "",
+		"description": "What makes our robot the most intelligent on the field.",
 		"creationDate": "14/12/2023, 20:11:22",
 		"platform": "V5",
 		"language": "cpp",
