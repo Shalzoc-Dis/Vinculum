@@ -29,8 +29,10 @@ int main() {
 
     while(1) {
         
-        printf("Right encoder: %f\n", -rightEncoder.rotation(vex::rotationUnits::deg));
-        printf("Left encoder: %f\n\n", -leftEncoder.rotation(vex::rotationUnits::deg));
+        //printf("Right encoder: %f\n", -rightEncoder.rotation(vex::rotationUnits::deg));
+        //printf("Left encoder: %f\n\n", -leftEncoder.rotation(vex::rotationUnits::deg));
+        printf("position: (%f, %f)\n", Vinculum::Robot::position.x, Vinculum::Robot::position.y);
+        printf("angle: %f\n\n", Vinculum::Robot::angle);
         // Allow other tasks to run
         vex::this_thread::sleep_for(10);
     }

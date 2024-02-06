@@ -1,6 +1,7 @@
 #pragma once
 #include <vex.h>
 #include "Logger.h"
+#include "Core.h"
 
 
 // VEXcode devices
@@ -16,4 +17,4 @@ extern vex::encoder rightEncoder;
 
 extern vex::competition Competition;
 
-void vexcodeInit( void );
+void vexcodeInit();

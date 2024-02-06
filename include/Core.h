@@ -5,7 +5,6 @@
 #include <fstream>
 #include <sstream>
 
-#include "robot-config.h"
 
 
 //vex::timer Timer;   // This creates a reference to the clock
@@ -39,14 +38,21 @@
             return sqrt(pow(x, 2) + pow(y, 2));
         }
 
-        float direction() {
-            return atan2(y, x);
+        float polarAngle() {
+            return atan2(y, x); // Returns the angle in radians
         }
 
         vector2 operator*(float const &obj) {
             vector2 res;
             res.x = x * obj;
             res.y = y * obj;
+            return res;
+        }
+
+        vector2 operator/(float const &obj) {
+            vector2 res;
+            res.x = x / obj;
+            res.y = y / obj;
             return res;
         }
 
@@ -59,6 +65,23 @@
             vector2 res;
             res.x = x / magnetude();
             res.y = y / magnetude();
+            return res;
+        }
+
+        // Rotate the vector by a given angle in radians
+        vector2 rotate(float radAngle) {   // This angle is in positive radians. It specifies counter-clockwise rotation angle
+            vector2 res;
+            // Alpha is the current angle of the vector
+            float alpha = polarAngle();
+            float hyp = magnetude();
+            // Make sure the angle is between 0 and 2PI
+            do {
+            radAngle > 2 * M_PI ? radAngle -= 2 * M_PI : radAngle;
+            } while (radAngle > 2 * M_PI);
+            // Beta is the final angle of the vector
+            float beta = alpha + radAngle;
+            res.x = hyp * cos(beta);
+            res.y = hyp * sin(beta);
             return res;
         }
     }; // struct vector2
@@ -95,6 +118,17 @@ namespace Vinculum {
 
         // This the mas of the robot in kg
         extern const float mass;
+
+        // The robot's current position
+        extern vector2 position;
+        extern float angle;    // In degrees, 0 degrees is right, 90 is up
+
+        // This is regarding the state of the robot
+        extern bool isAutonomous;
+        extern bool isMoving;
+        extern relativePathNode targetingPosition;
+        extern float speed;     // Parametric, ranging from 0 to 1. 1 is full speed, 0 is no speed
+         
     } // namespace Robot
 
 
@@ -107,7 +141,7 @@ namespace Vinculum {
         relativePathNode() {}
         ~relativePathNode() {}
         vector2 pos;
-        float angle;    // In Degrees
+        float angle;    // In Degrees, 0 degrees is right, 90 is up
     }; // struct relativePathNode
 
     struct absolutePathNode { 

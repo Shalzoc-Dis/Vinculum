@@ -19,7 +19,7 @@ vex::controller Controller1 = vex::controller(vex::controllerType::primary);
  * 
  * This should be called at the start of your int main function.
  */
-void vexcodeInit( void ) {
+void vexcodeInit() {
   std::cout << "Initialising...\n";
   Brain.Screen.print("Device initialization...");
   Brain.Screen.setCursor(2, 1);
@@ -45,4 +45,7 @@ void vexcodeInit( void ) {
   Brain.Screen.setCursor(1,1);
   wait(50, vex::timeUnits::msec);
   Brain.Screen.clearScreen();
+  // Initialise the robot's position
+  Vinculum::Robot::position = vector2(0, 0);
+  Vinculum::Robot::angle = 0;
 }
